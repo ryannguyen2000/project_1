@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { fetchSEOData } from "../layout";
+import _ from "lodash";
 
 export async function generateMetadata({
   params,
@@ -11,21 +12,21 @@ export async function generateMetadata({
 
   console.log("seoData", seoData);
 
-
   const metaImage = seoData.metas.find(
     (meta: any) => meta.name === "og:image"
   )?.content;
 
   return {
-    title: seoData.title || `${uid.toUpperCase()} PAGE`,
-    description:
-      seoData.metas.find((meta: any) => meta.name === "description")?.content ||
-      "Default description for TBK Foundation.",
+    title: _.get(seoData, "title", `${uid.toUpperCase()} PAGE`),
+    description: seoData
+      ? seoData.metas.find((meta: any) => meta.name === "description")?.content
+      : "Default description for TBK Foundation.",
     openGraph: {
-      title: seoData.title || `${uid.toUpperCase()} PAGE`,
-      description:
-        seoData.metas.find((meta: any) => meta.name === "description")
-          ?.content || "Default description for TBK Foundation.",
+      title: seoData?.title ?? `${uid.toUpperCase()} PAGE`,
+      description: seoData
+        ? seoData.metas.find((meta: any) => meta.name === "description")
+            ?.content
+        : "Default description for TBK Foundation.",
       url: `https://tbk.foundation/${uid}`,
       images: [
         {
@@ -36,10 +37,11 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: seoData.title || "TBK Foundation",
-      description:
-        seoData.metas.find((meta: any) => meta.name === "description")?.content ||
-        "Default description for TBK Foundation.",
+      title: seoData?.title ?? "TBK Foundation",
+      description: seoData
+        ? seoData.metas.find((meta: any) => meta.name === "description")
+            ?.content
+        : "Default description for TBK Foundation.",
       images: [metaImage || "https://tbk.foundation/default-og-image.jpg"],
     },
   };
