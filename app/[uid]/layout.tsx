@@ -10,11 +10,9 @@ export async function generateMetadata({
   const { uid } = await params;
   const seoData = await fetchSEOData(`/${uid}`);
 
-  console.log("seoData", seoData);
-
-  const metaImage = seoData.metas.find(
-    (meta: any) => meta.name === "og:image"
-  )?.content;
+  const metaImage = seoData
+    ? seoData.metas.find((meta: any) => meta.name === "og:image")?.content
+    : "https://tbk.foundation/default-og-image.jpg";
 
   return {
     title: _.get(seoData, "title", `${uid.toUpperCase()} PAGE`),
@@ -30,8 +28,8 @@ export async function generateMetadata({
       url: `https://tbk.foundation/${uid}`,
       images: [
         {
-          url: metaImage || "https://tbk.foundation/default-og-image.jpg",
-          alt: seoData.title || "TBK Foundation",
+          url: metaImage,
+          alt: _.get(seoData, "title", "TBK Foundation"),
         },
       ],
     },
