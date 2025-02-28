@@ -51,12 +51,11 @@ export function useConstructorDataAPI(documentId?: string, pageName?: string) {
     layout: _.get(data, "layoutJson.layoutJson", {}),
     component: componentString,
     isLoading: false,
+    error,
   };
 }
 
 export async function rebuilComponentMonaco(componentString: string) {
-  console.log("componentString", componentString);
-
   try {
     if (!componentString || typeof componentString !== "string") {
       console.error("Error: Invalid componentString", componentString);

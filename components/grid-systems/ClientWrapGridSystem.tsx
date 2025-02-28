@@ -7,7 +7,7 @@ import { useConstructorDataAPI } from "@/app/actions/use-constructor";
 import LoadingPage from "./loadingPage";
 
 export default function ClientWrapper(props: any) {
-  const { layout, isLoading } = useConstructorDataAPI(
+  const { layout, isLoading, error } = useConstructorDataAPI(
     props.documentId,
     props.pathName
   );
@@ -27,6 +27,10 @@ export default function ClientWrapper(props: any) {
 
   if (isLoading) {
     return <LoadingPage />;
+  }
+
+  if (error) {
+    return <div>Error loading layout: {error.message}</div>;
   }
 
   return (
