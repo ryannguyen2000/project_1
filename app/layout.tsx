@@ -13,6 +13,7 @@ export const fetchSEOData = async (path: string) => {
       },
       cache: "force-cache", // Sử dụng cache để giảm tải
     });
+
     const data = await response.json();
     return _.find(_.get(data, "docs"), {
       projectID: process.env.NEXT_SEO_PROJECTID as string,

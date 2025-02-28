@@ -9,6 +9,9 @@ export async function generateMetadata({
   const { uid } = await params;
   const seoData = await fetchSEOData(`/${uid}`);
 
+  console.log("seoData", seoData);
+
+
   const metaImage = seoData.metas.find(
     (meta: any) => meta.name === "og:image"
   )?.content;
