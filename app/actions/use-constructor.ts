@@ -63,15 +63,15 @@ export async function rebuilComponentMonaco(componentString: string) {
       return;
     }
 
-    const response = await fetch(`http://localhost:3000/api`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "text/plain",
-      },
-      body: componentString,
-    });
+    // const response = await fetch(`http://localhost:3000/api`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "text/plain",
+    //   },
+    //   body: componentString,
+    // });
 
-    await response.text();
+    // await response.text();
   } catch (error) {
     console.error("Build failed:", error);
   }
