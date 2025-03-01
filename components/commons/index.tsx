@@ -38,4 +38,5 @@ export const components = {
   accorditions: dynamic(() => import("./accorditions")),
   accorditions: dynamic(() => import("./accorditions")),
   accorditions: dynamic(() => import("./accorditions")),
+  accorditions: dynamic(() => import("./accorditions")),
 };
